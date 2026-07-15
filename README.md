@@ -1,6 +1,6 @@
 # Promptfish 🐟♟️
 
-**A bring-your-own-key chess coach that overlays Lichess & Chess.com — plus a macOS companion app.**
+**A bring-your-own-key chess coach that overlays Lichess & Chess.com — plus a desktop companion app for macOS and Windows.**
 
 Promptfish adds a floating coach to the analysis, study, and review boards on
 Lichess and Chess.com. Ask about any position, get move-by-move explanations,
@@ -15,15 +15,17 @@ for directly.
 
 ## What's in a release
 
-Every [release](https://github.com/MarcoDelRizzo/promptfish/releases/latest) ships two downloads — grab whichever you want (or both):
+Every [release](https://github.com/MarcoDelRizzo/promptfish/releases/latest) ships these downloads — grab whichever you need:
 
 | File | What it is |
 | --- | --- |
-| `promptfish-extension-<version>.zip` | The **browser extension** — the overlay on Lichess & Chess.com. |
-| `Promptfish-<version>-arm64.dmg` | The **macOS desktop app** (Apple Silicon) — bundles the coach server and connects Promptfish to Claude Desktop / Claude Code. |
+| `promptfish-extension-<version>.zip` | The **browser extension** — the overlay on Lichess & Chess.com. Works on its own. |
+| `Promptfish-<version>-arm64.dmg` | The **macOS desktop app** (Apple Silicon). |
+| `Promptfish Setup <version>.exe` | The **Windows desktop app** (Windows 10/11). |
 
-You do **not** need the desktop app to use the extension. The extension alone is
-the fastest way to start.
+You do **not** need the desktop app to use the extension — the extension alone is
+the fastest way to start (bring your own API key). The desktop app is for coaching
+**free with your own Claude Pro/Max subscription** (no API key needed).
 
 ---
 
@@ -36,20 +38,57 @@ the fastest way to start.
 5. Click **Load unpacked** and select the unzipped **`extension`** folder.
 6. Pin the Promptfish icon so it's easy to find.
 
-## Install — Desktop app (macOS, Apple Silicon)
+---
+
+## Install — Desktop app (macOS · Apple Silicon)
+
+Requires an **Apple Silicon** Mac (M1 / M2 / M3 / M4), macOS 12 or later. Intel
+Macs aren't built — use the browser extension instead.
 
 1. Download **`Promptfish-<version>-arm64.dmg`** from the latest release.
-2. Open the `.dmg` and drag **Promptfish** into **Applications**.
-3. First launch only: the app is unsigned, so macOS will warn. **Right-click the
-   app → Open → Open.** (Or allow it under *System Settings → Privacy & Security →
-   Open Anyway*.) After that it opens normally.
+2. Open the `.dmg` and drag **Promptfish** into your **Applications** folder.
+3. Open it from Applications. The app is **signed with an Apple Developer ID and
+   notarized**, so it opens with a normal double-click — no security workaround
+   needed. *(If macOS ever asks on the very first launch, right-click the app →
+   **Open** → **Open**.)*
 
-> The DMG is Apple-Silicon only. Intel Macs aren't built yet — use the browser
-> extension instead.
+From then on the app **updates itself automatically** in the background.
 
 ---
 
-## First run
+## Install — Desktop app (Windows 10 / 11)
+
+Requires 64-bit **Windows 10 or 11**.
+
+1. Download **`Promptfish Setup <version>.exe`** from the latest release.
+2. Run it. The installer isn't code-signed yet, so **Windows SmartScreen** may show
+   *"Windows protected your PC."* Click **More info → Run anyway**.
+3. Follow the installer (you can choose the install folder). It adds a **Promptfish**
+   Start-menu shortcut and launches the app.
+
+From then on the app **updates itself automatically** in the background.
+
+---
+
+## Coaching for free with your Claude subscription (desktop app)
+
+The desktop app can coach using **your own Claude Pro/Max** — no API key, no
+per-message cost. You'll need **Claude Code** installed
+(`npm i -g @anthropic-ai/claude-code`).
+
+1. Install the desktop app (above) and open it.
+2. In the extension popup, set the **engine** to **Claude Desktop**.
+3. Coach:
+   - **macOS:** just send a prompt in the overlay — Promptfish opens a Claude
+     terminal for you and reuses it.
+   - **Windows:** click **Connect Claude** in the app once, then send prompts.
+
+Prefer to bring your own API key instead? You can skip the desktop app entirely and
+just use the extension — see **First run** below.
+
+---
+
+## First run (extension + your own API key)
 
 1. Open a **Lichess or Chess.com analysis / study / review board** (not a live game).
 2. Click the floating **Promptfish** widget on the page.
@@ -68,27 +107,27 @@ the fastest way to start.
 
 ## Staying up to date
 
-Promptfish checks this repository for new releases automatically:
-
-- the **extension** shows an *"update available → Download"* banner in the overlay,
-- the **desktop app** pops a one-time *"Update available"* dialog.
-
-When you see it, download the new file and reload:
-
-- **Extension:** re-run *Load unpacked* on the new `extension` folder (or drop it
-  over the old one and hit **Reload** in `chrome://extensions`).
-- **Desktop:** open the new `.dmg` and replace the app in Applications.
+- **Desktop app (macOS & Windows):** updates **automatically** — it downloads new
+  releases in the background and installs them the next time you quit. You'll see a
+  small *"Promptfish updated"* note on the next launch.
+- **Extension:** shows an *"update available → Download"* banner in the overlay.
+  Download the new `promptfish-extension-<version>.zip`, then in `chrome://extensions`
+  drop the new `extension` folder over the old one and hit **Reload** (or re-run
+  *Load unpacked*).
 
 ---
 
 ## Troubleshooting
 
-- **"Promptfish is damaged / can't be opened" (macOS):** this is the unsigned-app
-  warning — right-click the app → **Open**, or allow it in *Privacy & Security*.
-- **Extension not showing on a game:** it's intentional — Promptfish stays off
-  live games. Open the **Analysis** board for that game instead.
+- **macOS asks to confirm on the first launch:** right-click the app → **Open** →
+  **Open** (needed at most once; the app is notarized).
+- **Windows SmartScreen warning:** **More info → Run anyway** — the installer just
+  isn't code-signed yet.
+- **Extension not showing on a game:** it's intentional — Promptfish stays off live
+  games. Open the **Analysis** board for that game instead.
 - **No coach responses:** double-check your API key and that your provider has
-  credit/quota.
+  credit/quota — or, in **Claude Desktop** mode, that Claude Code is installed and
+  the Claude terminal is running.
 
 ---
 
